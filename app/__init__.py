@@ -21,8 +21,8 @@ def hobbies():
 
 @app.route('/education')
 def education():
-    return render_template('education.html', title="Hobbies", url=os.getenv("URL"))
+    return render_template('education.html', title="Education", url=os.getenv("URL"))
 
 @app.route('/map')
 def map():
-    return render_template('map.html', title="Hobbies", url=os.getenv("URL"))
+    return render_template('map.html', title="Map", url=os.getenv("URL"))
