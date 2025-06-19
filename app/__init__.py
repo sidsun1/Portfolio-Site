@@ -1,6 +1,7 @@
 import os
 from flask import Flask, render_template, request
 from dotenv import load_dotenv
+import folium
 
 load_dotenv()
 app = Flask(__name__)
@@ -25,15 +26,25 @@ def education():
 
 @app.route('/map')
 def map():
-    locations = [
-        {"name": "New York", "lat": 40.7128, "lon": -74.0060, "images": ["img1.jpg", "img2.jpg"]},
-        {"name": "Los Angeles", "lat": 34.0522, "lon": -118.2437, "images": ["img1.jpg"]},
-        {"name": "Chicago", "lat": 41.8781, "lon": -87.6298, "images": ["img1.jpg", "img2.jpg","img3.jpg"]},
-    ]
+    m = folium.Map(
+        location=[45.35, -121.6972],
+        zoom_start=3,
+        min_zoom=3
+    )
+    
+    folium.Marker(
+        location=[45.3288, -121.6625],
+        tooltip="Click me!",
+        popup="Mt. Hood Meadows",
+        icon=folium.Icon(icon="cloud"),
+    ).add_to(m)
 
-    mapSettings = {
-        "customIcon": "static/img/fav_icon.svg",
-        "minZoom": 2,
-        "maxZoom": 100,
-    }
-    return render_template('map.html', locations=locations, mapSettings=mapSettings, title="Map", url=os.getenv("URL"))
+    folium.Marker(
+        location=[45.3311, -121.7113],
+        tooltip="Click me!",
+        popup="Timberline Lodge",
+        icon=folium.Icon(color="green"),
+    ).add_to(m)
+
+    map_html = m._repr_html_()
+    return render_template('map.html', map_html=map_html, title="Map", url=os.getenv("URL"))
