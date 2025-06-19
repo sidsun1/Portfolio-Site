@@ -27,24 +27,67 @@ def education():
 @app.route('/map')
 def map():
     m = folium.Map(
-        location=[45.35, -121.6972],
+        location=[40.7128, -74.0060],
         zoom_start=3,
         min_zoom=3
     )
-    
+
+    # Adding markers with title
     folium.Marker(
         location=[45.3288, -121.6625],
-        tooltip="Click me!",
-        popup="Mt. Hood Meadows",
+        tooltip="Mount Hood",
+        popup=getPopupContent("Mount Hood"),
         icon=folium.Icon(icon="cloud"),
     ).add_to(m)
 
+    # Adding another marker different icon
     folium.Marker(
-        location=[45.3311, -121.7113],
-        tooltip="Click me!",
-        popup="Timberline Lodge",
+        location=[47.6062, -122.3321],
+        tooltip="Seattle",
+        popup=getPopupContent("Seattle", image_url=[
+            "https://media.cntraveler.com/photos/5fc6818f3cfe1de2cab79372/4:3/w_4000,h_3000,c_limit/Amsterdam-GettyImages-840603854.jpg"]),
+        icon=folium.Icon(icon="star", color="orange", prefix='fa'),
+    ).add_to(m)
+    
+    # another marker with images
+    folium.Marker(
+        location=[34.0522, -118.2437],
+        tooltip="Los Angeles",
+        popup=getPopupContent("Los Angeles", image_url=[
+            "https://media.cntraveler.com/photos/5fc6818f3cfe1de2cab79372/4:3/w_4000,h_3000,c_limit/Amsterdam-GettyImages-840603854.jpg",
+            "https://media.cntraveler.com/photos/5fc6818f3cfe1de2cab79372/4:3/w_4000,h_3000,c_limit/Amsterdam-GettyImages-840603854.jpg",
+            "https://media.cntraveler.com/photos/5fc6818f3cfe1de2cab79372/4:3/w_4000,h_3000,c_limit/Amsterdam-GettyImages-840603854.jpg"
+            ]),
         icon=folium.Icon(color="green"),
     ).add_to(m)
 
     map_html = m._repr_html_()
-    return render_template('map.html', map_html=map_html, title="Map", url=os.getenv("URL"))
+    return render_template('map.html', map_html=map_html, title="Places I've Visited", 
+                            description="A map showing all the places I've visited.", url=os.getenv("URL"))
+
+
+# Function to create a popup with images and title
+def getPopupContent(title, image_url=[], size=100):
+    html = f'''<h4 style="text-align: center; margin-bottom: 10px;">{title}</h4>'''
+
+    count = len(image_url)
+    if count == 0:
+        return folium.Popup(html, max_width=300)
+
+    # set up grid layout for images
+    columns = min(3, count)
+    html += f'<div style="display: grid; grid-template-columns: repeat({columns}, 1fr); gap: 5px;">'
+    for url in image_url:
+        html += f'''
+        <img src="{url}" width="{size}" height="{size}" 
+        style="border-radius: 10px; object-fit: cover;">'''
+    html += '</div>'
+
+    rows = (count + 2) // 3 
+    title_height = 50 
+    iframe_width = columns * size + (columns - 1) * 5 + 20
+    iframe_height = rows * size + (rows - 1) * 5 + title_height
+
+    iframe = folium.IFrame(html=html, width=iframe_width, height=iframe_height)
+    popup = folium.Popup(iframe)
+    return popup
