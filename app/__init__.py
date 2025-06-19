@@ -26,11 +26,7 @@ def education():
 
 @app.route('/map')
 def map():
-    m = folium.Map(
-        location=[40.7128, -74.0060],
-        zoom_start=3,
-        min_zoom=3
-    )
+    m = folium.Map(  location=[40.7128, -74.0060], zoom_start=3,min_zoom=3)
 
     # Adding markers with title
     folium.Marker(
@@ -61,10 +57,27 @@ def map():
         icon=folium.Icon(color="green"),
     ).add_to(m)
 
-    map_html = m._repr_html_()
-    return render_template('map.html', map_html=map_html, title="Places I've Visited", 
-                            description="A map showing all the places I've visited.", url=os.getenv("URL"))
+    
+    m.get_root().html.add_child(folium.Element(setMapDetails(
+        title="My Travel Map",
+        description="Explore the places I've visited and the experiences I've had."))
+        )
 
+    map_html = m.get_root().render()
+    return render_template('map.html', map_html=map_html, url=os.getenv("URL"))
+
+# Function to set map details
+def setMapDetails(title, description):
+    with open(os.path.join(os.path.dirname(__file__), 'static', 'styles', 'map.css')) as f:
+        style = f'<style>{f.read()}</style>'
+    title_html = f'''
+    {style}
+    <div class="map-details">
+        <h2>{title}</h2>
+        <p>{description}</p>
+    </div>
+    '''
+    return title_html
 
 # Function to create a popup with images and title
 def getPopupContent(title, image_url=[], size=100):

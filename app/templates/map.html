@@ -7,19 +7,10 @@
     <meta property="og:title" content="Personal Portfolio">
     <meta property="og:description" content="My Personal Portfolio">
     <meta property="og:url" content="{{ url }}">
-
-    <!-- Leaflet Map CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.css" />
-    <link lang='sass' rel="stylesheet" href="./static/styles/map.css">
     <title>{{ title }}</title>
-
 </head>
 
 <body>
-    <div class="container">
-        <h2>{{ title }}</h2>
-        <p>{{ description }}</p>
-    </div>
     {{ map_html|safe }}
 </body>
 
