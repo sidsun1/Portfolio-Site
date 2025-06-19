@@ -30,4 +30,10 @@ def map():
         {"name": "Los Angeles", "lat": 34.0522, "lon": -118.2437, "images": ["img1.jpg"]},
         {"name": "Chicago", "lat": 41.8781, "lon": -87.6298, "images": ["img1.jpg", "img2.jpg","img3.jpg"]},
     ]
-    return render_template('map.html', locations=locations, MAP_API_KEY=os.getenv("MAP_API_KEY"), title="Map", url=os.getenv("URL"))
+
+    mapSettings = {
+        "customIcon": "static/img/fav_icon.svg",
+        "minZoom": 2,
+        "maxZoom": 100,
+    }
+    return render_template('map.html', locations=locations, mapSettings=mapSettings, title="Map", url=os.getenv("URL"))
