@@ -1,19 +1,30 @@
 import os
 from flask import Flask, render_template, request
 from dotenv import load_dotenv
+from pathlib import Path
+import json
 
 load_dotenv()
 app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return render_template('index.html', title="Siddharth Sundar", url=os.getenv("URL"))
-
-# TODO: Add respective html files for each sub route below
+    return render_template('index.html', title="MLH Fellow", url=os.getenv("URL"))
 
 @app.route('/work')
 def work():
-    return render_template('work.html', title="Experience", url=os.getenv("URL"))
+    path = Path('app/static/json-data/experiences.json')
+
+    try:
+        with open(path, 'r', encoding = 'utf-8') as f:
+            experiences = json.load(f)
+    except Exception as e:
+        experiences = []
+        print(f'Error loading experiences: {e}')
+
+    # print(experiences)
+    
+    return render_template('work.html', title="Experience", experiences = experiences, url=os.getenv("URL"))
 
 @app.route('/hobbies')
 def hobbies():
