@@ -1,6 +1,9 @@
 {% extends "base.html" %}
 
 {% block content %}
+
+<script src="{{ url_for('static', filename='js/map.js') }}"></script>
+
 <div class="map-header">
     <h2>{{ title }}</h2>
     <p>{{ description }}</p>
@@ -8,17 +11,29 @@
 
 <div class="places-container">
     {% for place in places %}
-    <div class="place-card">
-        <div class="slideshow-container">
-            {% for image in place.images %}
-            <div class="slide" style="animation-delay: {{ loop.index0 * 5 }}s;">
-                <img src="{{ image }}" alt="{{ place.title }} image">
+    <div class="place-card" onclick="this.classList.toggle('flipped')">
+        <div class="card-inner">
+            <div class="card-front">
+                <div class="slideshow-container">
+                    {% for image in place.images %}
+                    <div class="slide" style="animation-delay: {{ loop.index0 * 5 }}s;">
+                        <img src="{{ image }}" alt="{{ place.title }} image">
+                    </div>
+                    {% endfor %}
+                </div>
+                <div class="place-details">
+                    <h2>{{ place.title }}</h2>
+                    <p>{{ place.description }}</p>
+                </div>
             </div>
-            {% endfor %}
-        </div>
-        <div class="place-details">
-            <h2>{{ place.title }}</h2>
-            <p>{{ place.description }}</p>
+            <div class="card-back">
+                <h3>Notable Places</h3>
+                <ul class="notable-list">
+                    {% for note in place.notables %}
+                    <li>{{ note }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
         </div>
     </div>
     {% endfor %}

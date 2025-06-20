@@ -380,27 +380,58 @@ body {
 
 .place-card {
     position: relative;
-    overflow: hidden;
+    height: 400px;
+    width: 100%;
+    perspective: 1000px;
+    cursor: pointer;
     margin-bottom: 20px;
+}
+
+.card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s;
+    transform-style: preserve-3d;
+}
+
+.place-card.flipped .card-inner {
+    transform: rotateY(180deg);
+}
+
+.card-front,
+.card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    box-sizing: border-box;
 }
 
-.place-card img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
+.card-back {
+    background-color: #f8f8f8;
+    transform: rotateY(180deg);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
 }
 
-.place-card h3 {
-    font-size: 20px;
+.card-back h3 {
     color: #1d539f;
-    margin: 16px;
+    margin-bottom: 15px;
+    text-align: center;
 }
 
-.place-card p {
+.notable-list {
+    padding: 0 20px;
+}
+
+.notable-list li {
+    margin-bottom: 10px;
     color: #555;
-    margin: 0 16px 16px;
 }
 
 .slideshow-container {
@@ -416,6 +447,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
+    opacity: 0;
     animation: slideFade 15s infinite;
 }
 
@@ -426,11 +458,13 @@ body {
 }
 
 @keyframes slideFade {
-    5% {
-        opacity: 1;
-        z-index: 1;
+
+    0%,
+    100% {
+        opacity: 0;
     }
 
+    5%,
     25% {
         opacity: 1;
     }
@@ -438,4 +472,15 @@ body {
 
 .place-details {
     padding: 15px;
+}
+
+.place-details h2 {
+    font-size: 20px;
+    color: #1d539f;
+    margin: 0 0 10px 0;
+}
+
+.place-details p {
+    color: #555;
+    margin: 0;
 }
