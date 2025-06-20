@@ -58,8 +58,8 @@ def map():
     add_markers(folium_map, places)
 
     # Save to static file
-    map_path = os.path.join("app/static", "maps", "map.html")
-    os.makedirs(os.path.dirname(map_path), exist_ok=True)
+    map_path = Path("app/static/maps/map.html")
+    Path.mkdir(map_path.parent, exist_ok=True)
     folium_map.save(map_path)
 
     return render_template("map.html", places=places, title="Places I've Visited", description="The amazing places I've been to.", url=os.getenv("URL"))
