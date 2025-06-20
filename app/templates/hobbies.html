@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="hobbies-header">
+    <h2>{{title}}</h2>
+    <p>{{description}}</p>
+</div>
+
+<div class="hobbies-container">
+    {% for hobby in hobbies %}
+    <div class="hobby-card">
+        <div>
+            <img src="{{ hobby.image }}" alt="{{ hobby.title }} hobby">
+        </div>
+        <div class="hobby-details">
+            <h2>{{ hobby.title }}</h2>
+            <p>{{ hobby.description }}</p>
+            <div>
+                {% for type in hobby.type %}
+                <span>{{ type }}</span>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

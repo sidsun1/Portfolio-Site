@@ -29,7 +29,16 @@ def work():
 
 @app.route('/hobbies')
 def hobbies():
-    return render_template('hobbies.html', title="Hobbies", url=os.getenv("URL"))
+    path = Path('app/static/json-data/hobbies.json')
+
+    try:
+        with open(path, 'r', encoding='utf-8') as f:
+            hobbies = json.load(f)
+    except Exception as e:
+        hobbies = []
+        print(f'Error loading hobbies: {e}')
+
+    return render_template('hobbies.html', title="My Hobbies", description="These are the activities that keep me inspired and energized outside of my professional work.", hobbies=hobbies, url=os.getenv("URL"))
 
 @app.route('/education')
 def education():
@@ -37,39 +46,31 @@ def education():
 
 @app.route('/map')
 def map():
-    folium_map = folium.Map(  location=[40.7128, -74.0060], zoom_start=3,min_zoom=3)
+    path = Path('app/static/json-data/places.json')
+    try:
+        with open(path, 'r', encoding='utf-8') as f:
+            places = json.load(f)
+    except Exception as e:
+        places = []
+        print(f'Error loading places: {e}')
 
-    places = [
-        {"location": [40.7128, -74.0060], "title": "New York", "images": [ "https://media.cntraveler.com/photos/5fc6818f3cfe1de2cab79372/4:3/w_4000,h_3000,c_limit/Amsterdam-GettyImages-840603854.jpg"]},
-        {"location": [34.0522, -118.2437], "title": "Los Angeles", "images": []},
-        {"location": [51.5074, -0.1278], "title": "London", "images": [           
-            "https://media.cntraveler.com/photos/5fc6818f3cfe1de2cab79372/4:3/w_4000,h_3000,c_limit/Amsterdam-GettyImages-840603854.jpg",
-            "https://media.cntraveler.com/photos/5fc6818f3cfe1de2cab79372/4:3/w_4000,h_3000,c_limit/Amsterdam-GettyImages-840603854.jpg",
-            "https://media.cntraveler.com/photos/5fc6818f3cfe1de2cab79372/4:3/w_4000,h_3000,c_limit/Amsterdam-GettyImages-840603854.jpg"
-        ]},
-    ]
-
+    folium_map = folium.Map(location=[40.7128, -74.0060], zoom_start=3, min_zoom=3)
     add_markers(folium_map, places)
 
-    folium_map.get_root().html.add_child(folium.Element(render_template("map_header.html", title="Places I've Visited", description="Explore the world through my travels!", url=os.getenv("URL"))))
-    map_html = folium_map.get_root().render()
-    return render_template('map.html', map_html=map_html, url=os.getenv("URL"))
+    # Save to static file
+    map_path = Path("app/static/maps/map.html")
+    Path.mkdir(map_path.parent, exist_ok=True)
+    folium_map.save(map_path)
 
+    return render_template("map.html", places=places, title="Places I've Visited", description="The amazing places I've been to.", url=os.getenv("URL"))
 
-def add_markers(fmap, places):
+def add_markers(folium_map, places):
     for place in places:
-        popupContent = render_template("popup.html", title=place["title"], images=place.get("images", []), url=os.getenv("URL"))
-        
-        imgs_count = len(place.get("images", []))
-        if imgs_count == 0:
-            popup = folium.Popup(popupContent, max_width=300)
-        else:
-            popup = folium.Popup(popupContent, min_width=300)
-
         marker = folium.Marker(
             location=place["location"],
             tooltip=place["title"],
-            popup=popup,
-            icon=folium.Icon(icon="star", color="orange", prefix='fa')
+            popup=folium.Popup(place["title"], max_width=300),
+            icon=folium.Icon(icon="star", color="orange", prefix='fa'),
+            options={"autoPan": False}
         )
-        marker.add_to(fmap)
+        marker.add_to(folium_map)
