@@ -1,0 +1,50 @@
+[
+  {
+    "company": "Major League Hacking",
+    "role": "Production Engineering Fellow",
+    "location": "Remote - New York, NY",
+    "date": "June 2025 - Sept 2025",
+    "logo": "logo.svg",
+    "description": [
+      "Learned production engineering fundamentals including infrastructure as code, monitoring, and incident response.",
+      "Gained hands-on experience with CI/CD pipelines, logging, alerting, and performance optimization.",
+      "Collaborated with mentors and teams to troubleshoot live production issues and improve system reliability."
+    ]
+  },
+  {
+    "company": "Google",
+    "role": "Software Engineering Intern",
+    "location": "Mountain View, CA",
+    "date": "May 2024 - August 2024",
+    "logo": "logo.svg",
+    "description": [
+      "Developed features for Google Search infrastructure improving latency and reliability.",
+      "Implemented scalable microservices in Go and optimized data pipelines using BigQuery.",
+      "Collaborated with cross-functional teams following Agile practices to ship new product enhancements."
+    ]
+  },
+  {
+    "company": "Meta",
+    "role": "Frontend Engineer Intern",
+    "location": "Menlo Park, CA",
+    "date": "June 2023 - August 2023",
+    "logo": "logo.svg",
+    "description": [
+      "Built interactive UI components for Facebook’s mobile web app using React and TypeScript.",
+      "Improved app performance by reducing bundle size and optimizing rendering.",
+      "Worked closely with design and product teams to enhance user experience and accessibility."
+    ]
+  },
+  {
+    "company": "Amazon",
+    "role": "Cloud Operations Intern",
+    "location": "Seattle, WA",
+    "date": "June 2022 - August 2022",
+    "logo": "logo.svg",
+    "description": [
+      "Monitored and maintained AWS cloud infrastructure supporting high-traffic e-commerce systems.",
+      "Automated deployment workflows using AWS Lambda and CloudFormation.",
+      "Participated in incident management and root cause analysis to improve system uptime."
+    ]
+  }
+]
