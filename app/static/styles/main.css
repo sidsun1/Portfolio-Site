@@ -121,6 +121,7 @@ body {
 .work-experience-section::before {
     content: '';
     position: absolute;
+    top: 50px;
     left: 50%;
     transform: translateX(-50%);
     width: 4px;
