@@ -27,17 +27,17 @@ def work():
     experiences = load_json_data(path, 'experiences')
     return render_template('work.html', title="Experience", experiences = experiences, url=os.getenv("URL"))
 
+@app.route('/education')
+def education():
+    path = Path('app/static/json-data/education.json')
+    education = load_json_data(path, 'education')
+    return render_template('education.html', title="Education", education = education, url=os.getenv("URL"))
+
 @app.route('/hobbies')
 def hobbies():
     path = Path('app/static/json-data/hobbies.json')
     hobbies = load_json_data(path, 'hobbies')
     return render_template('hobbies.html', title="My Hobbies", description="These are the activities that keep me inspired and energized outside of my professional work.", hobbies=hobbies, url=os.getenv("URL"))
-
-@app.route('/education')
-def education():
-    path = Path('app/static/json-data/education.json')
-
-    return render_template('education.html', title="Education", url=os.getenv("URL"))
 
 @app.route('/map')
 def map():
