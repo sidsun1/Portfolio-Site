@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="education-header">
+    <h2>My Education</h2>
+</div>
+
+<div class="education-cards-container">
+    {% for e in education %}
+    <div class="education-card">
+        <div class="education-card-header">
+            <h3>{{ e.degree }}</h3>
+            <p class="school-name">{{ e.school }}</p>
+            <p class="years">{{ e.years }}</p>
+        </div>
+        <div class="education-image">
+            <img src="{{ e.image }}">
+        </div>
+        <div class="education-card-body">
+            <p>{{ e.description }}</p>
+        </div>
+        <div class="skills">
+            <h4>Relevant Skills</h4>
+            <ul>
+                {% for s in e.relevant_skills %}
+                <li>{{ s }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock %}

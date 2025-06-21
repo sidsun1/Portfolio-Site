@@ -121,6 +121,102 @@ body {
     font-weight: 700;
 }
 
+/*Education*/
+
+body {
+    font-family: "Roboto", sans-serif;
+    background-color: #ffffff;
+}
+
+.education-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.education-header h2 {
+    font-size: 36px;
+    color: #1d539f;
+    font-weight: 700;
+}
+
+.education-cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.education-card {
+    background: #ffffff;
+    border-radius: 10px;
+    padding: 20px;
+    width: 300px;
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.25);
+    transition: transform 0.45s ease;
+}
+
+.education-card:hover {
+    transform: translateY(-10px);
+}
+
+.education-card-header {
+    text-align: center;
+}
+
+.education-image img {
+    width: 100%;
+    height: auto;
+    max-height: 200px;
+    object-fit: contain;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.education-card-header h3 {
+    font-size: 24px;
+    color: #1d539f;
+}
+
+.education-card-header .school-name {
+    font-size: 18px;
+    color: #949494;
+}
+
+.education-card-header .years {
+    font-size: 16px;
+    color: #949494;
+}
+
+.education-card-body p {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.6;
+    margin-top: 10px;
+}
+
+.skills {
+    margin-top: 20px;
+}
+
+.skills h4 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #1d539f;
+}
+
+.skills ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.skills ul li {
+    font-size: 14px;
+    color: #949494;
+    padding-left: 10px;
+    margin-bottom: 5px;
+}
+
+/* Work/Experience Section */
 .work-experience-section {
     max-width: 900px;
     margin: 60px auto;
