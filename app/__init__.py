@@ -10,7 +10,7 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return render_template('index.html', title="MLH Fellow", url=os.getenv("URL"))
+    return render_template('index.html', title="Firstname Lastname", url=os.getenv("URL"))
 
 def load_json_data(path: Path, category: str) -> list:
     try:
