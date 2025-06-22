@@ -1,9 +1,32 @@
 {% extends "base.html" %}
 {% block content %}
 <div class="profile">
-    <div id="profile-picture" class="profile-picture">
-        <img src="./static/img/logo.jpg">
+    <div class="profile-text">
+        <p class="intro">HI THERE!</p>
+        <h1>I'm <span class="highlight">{{ name }}</span></h1>
+        <p class="subtitle">{{ about_me.subtitle }}</p>
+        <p class="description">{{ about_me.description }}</p>
+
+        <div class="social-icons">
+            <a href="https://github.com/{{ about_me.github }}" target="_blank" class="icon-btn" aria-label="GitHub">
+                <i class="fab fa-github"></i>
+            </a>
+            <a href="https://linkedin.com/in/{{ about_me.linkedin }}" target="_blank" class="icon-btn"
+                aria-label="LinkedIn">
+                <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="https://twitter.com/{{ about_me.twitter }}" target="_blank" class="icon-btn" aria-label="Twitter">
+                <i class="fab fa-twitter"></i>
+            </a>
+        </div>
+
+        <div class="profile-buttons">
+            <a class="btn btn-primary" href="{{ url_for('education') }}">More About Me</a>
+            <a class="btn btn-outline" href="{{ url_for('work') }}">View My Work</a>
+        </div>
     </div>
-    <h1>{{ title }}</h1>
+    <div class="profile-image">
+        <img src="./static/img/logo.jpg" alt="Profile Picture" />
+    </div>
 </div>
 {% endblock %}

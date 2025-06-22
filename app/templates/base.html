@@ -8,7 +8,7 @@
     <meta property="og:title" content="Personal Portfolio">
     <meta property="og:description" content="My Personal Portfolio">
     <meta property="og:url" content="{{ url }}">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link
         href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
@@ -27,7 +27,14 @@
                     <img src="./static/img/logo.svg" />
                 </div>
             </a>
-            <nav class="nav-links">
+
+            <div class="hamburger" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <nav class="nav-links" id="navLinks">
                 <a href="{{ url_for('work') }}">Work</a>
                 <a href="{{ url_for('education') }}">Education</a>
                 <a href="{{ url_for('hobbies') }}">Hobbies</a>
@@ -36,19 +43,12 @@
         </div>
     </header>
     {% block content %}{% endblock %}
-    <div class="education-cards-container">
-        <div class="education-card">
-            <div class="education-card-header">
-                <h3> About Me </h3>
-            </div>
-            <div class="education-card-body">
-                <p>
-                    Hello, I'm a passionate Computer Science student at X University, with a strong interest in software engineering
-                    and building impactful products. Welcome to my portfolio, a snapshot of my journey, showcasing my various skills,
-                    interests, and history that has shaped me into who I am today!
-                </p>
-            </div>
-        </div>
-    </div>
+    <script>
+        function toggleMenu() {
+            const nav = document.getElementById('navLinks');
+            nav.classList.toggle('active');
+        }
+    </script>
 </body>
+
 </html>
