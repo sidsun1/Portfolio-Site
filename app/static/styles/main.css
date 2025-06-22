@@ -253,10 +253,12 @@ body {
     .profile-image {
         margin-top: 20px;
     }
+
     .social-icons {
         justify-content: center;
     }
 }
+
 /*#endregion */
 
 /*#region Education*/
@@ -480,6 +482,78 @@ body {
     width: 1em;
     margin-left: -1em;
 }
+
+.section-divider {
+    height: 2px;
+    background-color: #1d539f;
+    margin: 40px;
+    opacity: 0.2;
+    border-radius: 1px;
+    clear: both;
+}
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin: 40px;
+}
+
+.project-card {
+    background-color: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    perspective: 1000px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.project-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+.project-thumb {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    border-bottom: 4px solid #1d539f;
+}
+
+.project-info {
+    padding: 20px;
+}
+
+.project-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #1d539f;
+    margin: 0 0 10px 0;
+}
+
+.project-desc {
+    color: #444;
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.project-links {
+    display: flex;
+    gap: 15px;
+}
+
+.project-links a {
+    text-decoration: none;
+    color: #1d539f;
+    font-weight: 600;
+    border: 2px solid #1d539f;
+    padding: 8px 12px;
+    border-radius: 6px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
 
 /*#endregion */
 
