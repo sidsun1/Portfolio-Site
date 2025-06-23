@@ -1,5 +1,9 @@
 {% extends "base.html" %}
 
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/ProjectDetails.js') }}"></script>
+{% endblock %}
+
 {% block content %}
 <div class="work-experience-section">
     <h1 class="section-title">Work Experience</h1>
@@ -8,7 +12,8 @@
     <div class="experience-card">
         <div class="exp-header">
             {% if exp.logo %}
-                <img src="{{ url_for('static', filename='img/' + exp.logo) }}" alt="{{ exp.company }} logo" class="company-logo">
+            <img src="{{ url_for('static', filename='img/' + exp.logo) }}" alt="{{ exp.company }} logo"
+                class="company-logo">
             {% endif %}
             <div>
                 <h2>{{ exp.role }}</h2>
@@ -18,11 +23,56 @@
         </div>
         <ul class="exp-description">
             {% for bullet in exp.description %}
-                <li>{{ bullet }}</li>
+            <li>{{ bullet }}</li>
             {% endfor %}
         </ul>
     </div>
     {% endfor %}
     <div style="clear: both;"></div>
 </div>
+
+<hr class="section-divider" />
+
+<div>
+    <h2 class="section-title">My Projects</h2>
+    <div class="projects-grid">
+
+        <div class="places-container">
+            {% for project in projects %}
+            <div class="place-card" onclick="this.classList.toggle('flipped')">
+                <div class="card-inner">
+                    <div class="card-front">
+                        <div class="project-front">
+                            <img class="project-thumb" src="{{ project.image }}" alt="{{ project.title }} Screenshot" />
+                            <div class="project-info">
+                                <h3 class="project-title">{{ project.title }}</h3>
+                                <p class="project-desc">{{ project.description }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-back">
+                        <h4>Project Details</h4>
+                        <p>{{ project.description }}</p>
+                        <div class="project-links">
+                            {% if project.github %}
+                            <a href="{{ project.github }}" target="_blank" class="project-link">GitHub</a>
+                            {% endif %}
+                            {% if project.demo %}
+                            <a href="{{ project.demo }}" target="_blank" class="project-link">Live Demo</a>
+                            {% endif %}
+                        </div>
+                        <div class="project-tech">
+                            <h4>Technologies Used</h4>
+                            <p>{{ project.technologies | join(', ') }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+    </div>
+</div>
+
+
 {% endblock %}

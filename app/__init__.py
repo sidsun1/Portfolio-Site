@@ -8,10 +8,6 @@ import folium
 load_dotenv()
 app = Flask(__name__)
 
-@app.route('/')
-def index():
-    return render_template('index.html', title="Firstname Lastname", url=os.getenv("URL"))
-
 def load_json_data(path: Path, category: str) -> list:
     try:
         with open(path, 'r', encoding = 'utf-8') as f:
@@ -21,11 +17,19 @@ def load_json_data(path: Path, category: str) -> list:
         print(f'Error loading {category}: {e}')
     return contents
 
+@app.route('/')
+def index():
+    path = Path('app/static/json-data/aboutMe.json')
+    about_me = load_json_data(path, 'aboutMe')
+    return render_template('index.html', name="Firstname Lastname", about_me=about_me, url=os.getenv("URL"))
+
 @app.route('/work')
 def work():
     path = Path('app/static/json-data/experiences.json')
+    pathProjects = Path('app/static/json-data/projects.json')
     experiences = load_json_data(path, 'experiences')
-    return render_template('work.html', title="Experience", experiences = experiences, url=os.getenv("URL"))
+    projects = load_json_data(pathProjects, 'projects')
+    return render_template('work.html', title="Experience", experiences=experiences, projects=projects, url=os.getenv("URL"))
 
 @app.route('/education')
 def education():
