@@ -13,4 +13,4 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Run redeploy-site script
-        run: bash deployments/redeploy-site.sh
+        run: bash app/deployments/redeploy-site.sh
