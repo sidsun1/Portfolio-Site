@@ -53,6 +53,14 @@ def get_time_line_post():
                 'timeline_posts': [model_to_dict(p) for p in TimelinePost.select().order_by(TimelinePost.created_at.desc())]
         }
 
+@app.route('/api/timeline_post/<int:id>', methods=['DELETE'])
+def delete_time_line_post(id):
+    post = TimelinePost.get_or_none(TimelinePost.id == id)
+    if post:
+        post.delete_instance()
+        return {'result': 'success'}, 200
+    return {'result': 'error'}, 404
+
 def load_json_data(path: Path, category: str) -> list:
     try:
         with open(path, 'r', encoding = 'utf-8') as f:
