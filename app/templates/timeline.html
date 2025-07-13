@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block content %}
+<section class="timeline">
+  <h2 class="timeline__title">Timeline Posts</h2>
+
+  <div class="timeline-form">
+    <form id="timelineForm">
+      <input type="text" name="name" placeholder="Your name" required>
+      <input type="email" name="email" placeholder="Your email" required>
+      <textarea name="content" rows="4" placeholder="What’s on your mind?" required></textarea>
+      <button type="submit" class="btn btn-primary">Post</button>
+    </form>
+  </div>
+
+  <div class="timeline-posts" id="timelinePosts"></div>
+</section>
+
+<script>
+(async () => {
+  const form = document.getElementById('timelineForm');
+  const list = document.getElementById('timelinePosts');
+
+  async function refresh() {
+    const { timeline_posts } = await fetch('/api/timeline_post').then(r => r.json());
+    list.innerHTML = timeline_posts.map(p => `
+      <div class="post">
+        <strong>${p.name}</strong>
+        <small> | ${p.email}</small>
+        <p>${p.content}</p>
+        <small>${new Date(p.created_at).toLocaleString()}</small>
+      </div>
+    `).join('');
+  }
+
+  form.addEventListener('submit', async e => {
+    e.preventDefault();
+    const payload = new FormData(form);
+    await fetch('/api/timeline_post', {
+      method: 'POST',
+      body: payload,
+    });
+    form.reset();
+    await refresh();
+  });
+  await refresh();
+})();
+</script>
+{% endblock %}

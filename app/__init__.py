@@ -70,6 +70,10 @@ def load_json_data(path: Path, category: str) -> list:
         print(f'Error loading {category}: {e}')
     return contents
 
+@app.route('/timeline')
+def timeline():
+     return render_template('timeline.html', title = 'Timeline', url=os.getenv("URL"))
+
 @app.route('/')
 def index():
     path = Path('app/static/json-data/aboutMe.json')

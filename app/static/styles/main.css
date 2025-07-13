@@ -665,6 +665,7 @@ body {
 /*#endregion */
 
 /*#region Map*/
+
 .map-header {
     text-align: center;
     margin-bottom: 30px;
@@ -806,6 +807,71 @@ body {
 .place-details p {
     color: #555;
     margin: 0;
+}
+
+/*#endregion */
+
+/*#region Timeline*/
+
+.timeline {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+.timeline__title {
+  margin-bottom: 0.25rem;
+  color: #1C539F;
+  font-size: 1.75rem;
+}
+
+.timeline-form,
+.timeline-posts {
+  background: #ffffff;
+  border-radius: 6px;
+  padding: 1rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.timeline-form form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.timeline-form input,
+.timeline-form textarea {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #f7ba2a;
+  border-radius: 8px;
+  resize: none;
+}
+
+.timeline-posts .post {
+  padding: 0.75rem 0;
+  border-bottom: 1px solid #f7ba2a;
+}
+.timeline-posts .post:last-child {
+  border-bottom: none;
+}
+
+.timeline-form input,
+.timeline-form textarea {
+  margin-left: -10px;
+}
+
+.timeline-form button {
+    margin-right: 5px;
+}
+
+.timeline-posts .post strong {
+  color: #1C539F;
+  font-weight: 700;
+}
+
+.timeline-form button {
+  border: none;
+  outline: none;
 }
 
 /*#endregion */
