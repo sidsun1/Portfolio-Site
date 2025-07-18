@@ -7,19 +7,23 @@ from peewee import *
 from playhouse.shortcuts import model_to_dict
 import json
 import folium
+import re
 
 load_dotenv()
 app = Flask(__name__)
 
 ### Databases ###
 
-mydb = \
-MySQLDatabase(os.getenv('MYSQL_DATABASE'),                                        
-            user = os.getenv('MYSQL_USER'),
-            password = os.getenv('MYSQL_PASSWORD'),
-            host = os.getenv('MYSQL_HOST'),
-            port = 3306
-)
+if os.getenv("TESTING") == "true":
+    print("Running in test mode")
+    mydb = SqliteDatabase('file:memory?mode=memory&cache=shared', uri=True)
+else:
+    mydb = MySQLDatabase(os.getenv("MYSQL_DATABASE"),
+        user=os.getenv("MYSQL_USER"),
+        password=os.getenv("MYSQL_PASSWORD"),
+        host=os.getenv("MYSQL_HOST"),
+        port=3306
+    )
 
 # print(mydb)
 
@@ -40,9 +44,36 @@ connect_db(mydb)
 
 @app.route('/api/timeline_post', methods = ['POST'])
 def post_time_line_post():
-        name = request.form['name']
-        email = request.form['email']
-        content = request.form['content']
+        
+        #Get form data, except KeyError if not present
+        try:
+            name = request.form['name'].strip()
+        except KeyError:
+            return 'Invalid name', 400
+            
+        try:
+            email = request.form['email'].strip()
+        except KeyError:
+            return 'Invalid email', 400
+            
+        try:
+            content = request.form['content'].strip()
+        except KeyError:
+            return 'Invalid content', 400
+
+        # Validate name
+        if not name:
+             return 'Invalid name', 400
+        
+        # Validate content
+        if not content:
+            return 'Invalid content', 400
+        
+        # Validate email format
+        email_pattern = r'^[a-zA-Z0-9]+([._-][0-9a-zA-Z]+)*@[a-zA-Z0-9]+([.-][0-9a-zA-Z]+)*\.[a-zA-Z]{2,}$'
+        if not email or not re.match(email_pattern, email):
+            return 'Invalid email', 400
+        
         timeline_post = TimelinePost.create(name = name, email = email, content = content)
 
         return model_to_dict(timeline_post)
