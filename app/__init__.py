@@ -8,6 +8,7 @@ from playhouse.shortcuts import model_to_dict
 import json
 import folium
 import re
+import time
 
 load_dotenv()
 app = Flask(__name__)
@@ -40,6 +41,7 @@ def connect_db(mydb: MySQLDatabase):
         mydb.connect()
         mydb.create_tables([TimelinePost])
 
+time.sleep(10)
 connect_db(mydb)
 
 @app.route('/api/timeline_post', methods = ['POST'])
