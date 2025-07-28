@@ -3,16 +3,8 @@
     "degree": "Bachelor of Science in Computer Science",
     "school": "University of California, Irvine",
     "years": "2024 - 2027",
-    "description": "Focused on foundational computer science concepts such as algorithms, data structures, software engineering, and computer systems.",
+    "description": "Focused on foundational computer science concepts such as algorithms, data structures, software engineering, and operating systems.",
     "relevant_skills": ["C++", "Python", "Artificial Intelligence", "Data Structures", "Software Engineering", "Operating Systems"],
     "image": "https://lmnarchitects.com/wp-content/uploads/2021/12/Division-of-Continuing-Education-Building-University-of-California-Irvine_Image-Page-2000x800.jpg"
-  },
-  {
-    "degree": "Master of Science in Artificial Intelligence",
-    "school": "Massachusetts Institute of Technology",
-    "years": "2027 - 2029",
-    "description": "Specialized in artificial intelligence, deep learning, machine learning, and natural language processing, with research experience in reinforcement learning.",
-    "relevant_skills": ["Deep Learning", "RAG", "TensorFlow", "Reinforcement Learning", "Natural Language Processing", "Machine Learning"],
-    "image": "https://www.science.org/do/10.1126/science.aav7395/abs/MIT_16x9_0.jpg"
   }
 ]

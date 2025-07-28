@@ -1,25 +1,10 @@
 [
-        {
-            "location": [40.7128, -74.0060], 
-            "title": "New York", 
-            "description": "visited this place in 2021 and it was amazing to see the skyline and the diverse culture.",
-            "notables": ["Statue of Liberty", "Central Park", "Times Square"],
-            "images": [ "https://hips.hearstapps.com/hmg-prod/images/hbz-venice-gettyimages-489741024-1505338894.jpg?crop=1xw:1xh;center,top&resize=980:*","https://media.cntraveler.com/photos/5fc6818f3cfe1de2cab79372/4:3/w_4000,h_3000,c_limit/Amsterdam-GettyImages-840603854.jpg"]},
-        {
-            "location": [34.0522, -118.2437], 
-            "title": "Los Angeles", 
-            "description": "visited this place in 2020 and it was amazing to see the beaches and the vibrant culture.",
-            "notables": ["Hollywood Sign", "Griffith Observatory", "Santa Monica Pier"],
-            "images": ["https://media.cntraveler.com/photos/5fc6818f3cfe1de2cab79372/4:3/w_4000,h_3000,c_limit/Amsterdam-GettyImages-840603854.jpg"]},
-        {
-            "location": [51.5074, -0.1278], 
-            "title": "London", 
-            "description": "visited this place in 2019 and it was amazing to see the historical sites and modern attractions.",
-            "notables": ["Big Ben", "Tower Bridge", "British Museum"],
-            "images": [           
-                "https://media.cntraveler.com/photos/5fc6818f3cfe1de2cab79372/4:3/w_4000,h_3000,c_limit/Amsterdam-GettyImages-840603854.jpg",
-                "https://hips.hearstapps.com/hmg-prod/images/hbz-venice-gettyimages-489741024-1505338894.jpg?crop=1xw:1xh;center,top&resize=980:*",
-                "https://media.cntraveler.com/photos/5fc6818f3cfe1de2cab79372/4:3/w_4000,h_3000,c_limit/Amsterdam-GettyImages-840603854.jpg"
-            ]
-        }
-    ]
+    {
+        "location": [37.8199, 122.4786], 
+        "title": "San Francisco", 
+        "description": "Lived in the Bay Area for most of my life, and have visited many of the notable landmarks here from Golden Gate Bridge to Alcatraz.",
+        "notables": ["Golden Gate Bridge", "Pier 39", "Alcatraz Prison"],
+        "images": ["https://cdn.britannica.com/13/77413-050-95217C0B/Golden-Gate-Bridge-San-Francisco.jpg", "https://www.travelawaits.com/wp-content/uploads/2022/09/pier-39-san-francisco.jpg?resize=800%2C800", "https://www.nps.gov/common/uploads/banner_image/pwr/homepage/9A38B580-BF6D-14C4-9F5C262C4836E906.jpg"]
+    }
+]
+

@@ -111,7 +111,7 @@ def timeline():
 def index():
     path = Path('app/static/json-data/aboutMe.json')
     about_me = load_json_data(path, 'aboutMe')
-    return render_template('index.html', name="Firstname Lastname", about_me=about_me, url=os.getenv("URL"))
+    return render_template('index.html', name="Siddharth Sundar", about_me=about_me, url=os.getenv("URL"))
 
 @app.route('/work')
 def work():
