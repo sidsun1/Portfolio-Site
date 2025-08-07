@@ -30,9 +30,6 @@ jobs:
       - name: Run Tests
         run: ./tests/run_test.sh
 
-      - name: Force Failure
-        run: exit 1
-
       - name: Notify Discord On Success
         if: success()
         run: |
@@ -60,6 +57,7 @@ jobs:
           curl -s -X POST "${{ secrets.DISCORD_WEBHOOK }}" \
           -H "Content-Type: application/json" \
           -d '{
+            "content": "<@&1402893883150569584>",
             "embeds": [
               {
                 "title": "❌ Testing Failed!",
