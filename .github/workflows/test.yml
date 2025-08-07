@@ -29,3 +29,49 @@ jobs:
 
       - name: Run Tests
         run: ./tests/run_test.sh
+
+      - name: Force Failure
+        run: exit 1
+
+      - name: Notify Discord On Success
+        if: success()
+        run: |
+          curl -s -X POST ${{ secrets.DISCORD_WEBHOOK }} \
+          -H "Content-Type: application/json" \
+          -d '{
+            "embeds": [
+              {
+                "title": "✅ Testing Successful!",
+                "description": "All tests have passed!",
+                "color": 3066993,
+                "fields": [
+                  { "name": "Branch", "value": "'"${GITHUB_REF##*/}"'", "inline": true },
+                  { "name": "Commit", "value": "[`'"${GITHUB_SHA::7}"'`](https://github.com/'"${GITHUB_REPOSITORY}"'/commit/'"${GITHUB_SHA}"')", "inline": true },
+                  { "name": "Author", "value": "'"${GITHUB_ACTOR}"'", "inline": true }
+                ],
+                "footer": { "text": "Testing Notification" },
+                "timestamp": "'"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"'"
+              }
+            ]
+          }'
+      - name: Notify Discord On Failure
+        if: failure()
+        run: |
+          curl -s -X POST "${{ secrets.DISCORD_WEBHOOK }}" \
+          -H "Content-Type: application/json" \
+          -d '{
+            "embeds": [
+              {
+                "title": "❌ Testing Failed!",
+                "description": "🚨 Some tests have failed.\n[📄 View Logs]('"https://github.com/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"')",
+                "color": 16711680,
+                "fields": [
+                  { "name": "Branch", "value": "'"${GITHUB_REF##*/}"'", "inline": true },
+                  { "name": "Commit", "value": "[`'"${GITHUB_SHA::7}"'`](https://github.com/'"${GITHUB_REPOSITORY}"'/commit/'"${GITHUB_SHA}"')", "inline": true },
+                  { "name": "Author", "value": "'"${GITHUB_ACTOR}"'", "inline": true }
+                ],
+                "footer": { "text": "Testing Notification" },
+                "timestamp": "'"$(date -u +"%Y-%m-%dT%H:%M:%SZ")"'"
+              }
+            ]
+          }'
